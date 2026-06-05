@@ -69,18 +69,41 @@ function MovieDetails(){
                         </p>
 
                         <p>
-                            {movie.overview}
+                            🍀 {movie.overview}
                         </p>
 
+                    <div className = "movie-meta">
+
                         <p>
-                            🎭 Genres:
-                            {movie.genres
+                            🎭 Genres: {movie.genres
                                 .map(genre => genre.name)
                                 .join(", ")}
                         </p>
 
+                        <p>
+                            ⚡️ Runtime: {movie.runtime} min
+                        </p>
+
+                        <p>
+                            🌎 Original Language: {movie.original_language.toUpperCase()}
+                        </p>
+
+                        <p>
+                            👥 Votes: {movie.vote_count}
+                        </p>
+
+                        <p>
+                            🎬 Production: {movie.production_companies
+                                .slice(0, 3)
+                                .map(company => company.name)
+                                .join(", ")
+                            }
+                        </p>
+
                     </div>
+
                 </div>
+            </div>
 
                 <div className = "similar-movies">
                     <h2>You May Also Like</h2>
