@@ -37,3 +37,18 @@ export async function getSimilarMovies(id) {
 
     return data.results;
 }
+
+export async function getMovieTrailer (movieId) {
+    const response = await fetch(
+        `${BASE_URL}/movie/${movieId}/videos?api_key=${API_KEY}`
+    );
+    const data = await response.json();
+
+    const trailer = data.results?.find(
+        video => 
+            video.site === "YouTube" &&
+            video.type === "Trailer"
+    );
+
+    return trailer;
+}

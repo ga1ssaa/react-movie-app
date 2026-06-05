@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getMovieDetails, getSimilarMovies } from '../services/api';
+import { getMovieDetails, getSimilarMovies, getMovieTrailer } from '../services/api';
 import MovieCard from '../components/MovieCard.jsx'
 import '../css/MovieDetails.css' 
 
@@ -10,6 +10,7 @@ function MovieDetails(){
 
     const [movie, setMovie] = useState(null);
     const [similarMovies, setSimilarMovies] = useState([]);
+    const [trailer, setTrailer] = useState(null);
     const [loading, setLoading] = useState(true);
     
     useEffect(() => {
@@ -19,6 +20,8 @@ function MovieDetails(){
                 setMovie(data);
                 const similar = await getSimilarMovies(id);
                 setSimilarMovies(similar);
+                const trailer = await getMovieTrailer(id);
+                setTrailer(trailer);
             }
             catch(error){
                 console.error(error);
@@ -40,70 +43,80 @@ function MovieDetails(){
     }
 
     return( 
-        <div
-            className="movie-page"
-            style={{
-                backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`
-            }}
-        >
-            <div className="movie-overlay">
+            <div
+                className="movie-page"
+                style={{
+                    backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`
+                }}
+            >
+                <div className="movie-overlay">
 
-                <div className="movie-details">
+                    <div className="movie-details">
 
-                    <img
-                        className="movie-details-poster"
-                        src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                        alt={movie.title}
-                    />
+                        <img
+                            className="movie-details-poster"
+                            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                            alt={movie.title}
+                        />
 
-                    <div className="movie-details-info">
+                        <div className="movie-details-info">
 
-                        <h1>{movie.title}</h1>
+                            <h1>{movie.title}</h1>
 
-                        <p>
-                            ⭐ Rating: {movie.vote_average.toFixed(1)} / 10
-                        </p>
+                            <p>
+                                ⭐ Rating: {movie.vote_average.toFixed(1)} / 10
+                            </p>
 
-                        <p>
-                            📅 Release Date: {movie.release_date}
-                        </p>
+                            <p>
+                                📅 Release Date: {movie.release_date}
+                            </p>
 
-                        <p>
-                            🍀 {movie.overview}
-                        </p>
+                            <p>
+                                🍀 {movie.overview}
+                            </p>
 
-                    <div className = "movie-meta">
+                        <div className = "movie-meta">
 
-                        <p>
-                            🎭 Genres: {movie.genres
-                                .map(genre => genre.name)
-                                .join(", ")}
-                        </p>
+                            <p>
+                                🎭 Genres: {movie.genres
+                                    .map(genre => genre.name)
+                                    .join(", ")}
+                            </p>
 
-                        <p>
-                            ⚡️ Runtime: {movie.runtime} min
-                        </p>
+                            <p>
+                                ⚡️ Runtime: {movie.runtime} min
+                            </p>
 
-                        <p>
-                            🌎 Original Language: {movie.original_language.toUpperCase()}
-                        </p>
+                            <p>
+                                🌎 Original Language: {movie.original_language.toUpperCase()}
+                            </p>
 
-                        <p>
-                            👥 Votes: {movie.vote_count}
-                        </p>
+                            <p>
+                                👥 Votes: {movie.vote_count}
+                            </p>
 
-                        <p>
-                            🎬 Production: {movie.production_companies
-                                .slice(0, 3)
-                                .map(company => company.name)
-                                .join(", ")
-                            }
-                        </p>
-
+                            <p>
+                                🎬 Production: {movie.production_companies
+                                    .slice(0, 3)
+                                    .map(company => company.name)
+                                    .join(", ")
+                                }
+                            </p>
+                        </div>
                     </div>
-
                 </div>
-            </div>
+                
+                {trailer && (
+                    <div className="movie-trailer">
+                        <h2>🎬 Official Trailer</h2>
+
+                        <iframe
+                            src={`https://www.youtube.com/embed/${trailer.key}`}
+                            title="Movie Trailer"
+                            allowFullScreen
+                        />
+                    </div>
+                )}
 
                 <div className = "similar-movies">
                     <h2>You May Also Like</h2>

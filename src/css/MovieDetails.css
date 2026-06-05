@@ -53,6 +53,24 @@
 .movie-meta p{
     margin-bottom: 10px;
 }
+.movie-trailer{
+    max-width: 1200px;
+    margin: 80px auto;
+    text-align: center;
+}
+.movie-trailer h2{
+    color: hsl(195, 41%, 45%);
+    margin-bottom: 25px;
+    font-size: 2.5rem;
+}
+.movie-trailer iframe{
+    width: 100%;
+    max-width: 1000px;
+    aspect-ratio: 16/9;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 8 30px rgba(0,0,0,0.4);
+}
 .similar-movies{
     margin-top: 80px;
     max-width: 1200px;
@@ -105,6 +123,17 @@
     }
     .movie-details-info p{
         font-size: 1rem;
+    }
+    .movie-trailer{
+        margin: 50px auto;
+        padding: 0 15px;
+    }
+    .movie-trailer h2{
+        font-size: 2rem;
+    }
+    .movie-trailer iframe{
+        width: 100%;
+        aspect-ratio: 16/9;
     }
     .similar-movies h2{
         font-size: 2rem;
