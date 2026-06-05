@@ -1,0 +1,26 @@
+body{
+    background-color: hsl(0, 0%, 90%);
+}
+.movies-grid{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+h1{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-align: center;
+}
+input{
+    font-family: Arial, Helvetica, sans-serif;
+    color: hsl(0, 0%, 90%);
+    background-color: hsl(221, 39%, 11%);
+    display: flex;
+    text-align: center;
+    justify-self: center;
+    margin-bottom: 20px;
+    font-size: 1.6rem;
+    border-radius: 7px;
+    border: 1px solid 
+}
