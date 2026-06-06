@@ -4,11 +4,11 @@
     box-sizing: border-box;
 }
 html{
-    background-color: #04112b;
+    background-color: hsl(220, 83%, 9%);
 }
 body{
     overscroll-behavior: none;
-    background-color: #04112b;
+    background-color: hsl(220, 83%, 9%);
 }
 #root{
     width: 100%;
@@ -40,4 +40,21 @@ input{
     font-size: 1.6rem;
     border-radius: 7px;
     border: 1px solid 
+}
+.load-more-btn{
+    display: block;
+    background-color:  hsl(220, 83%, 9%);
+    color: white;
+    margin: 10px auto 40px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+.load-more-btn:hover{
+    color: hsl(48, 96%, 53%);
+    transform: scale(1.05);
 }

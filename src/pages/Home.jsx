@@ -9,7 +9,8 @@ function Home(){
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [searchQuery, setSearhQuery] = useState("");
-    
+    const [visibleMovies, setVisibleMovies] = useState(12);
+
     useEffect(() => {
 
         const loadMovies = async () => {
@@ -66,12 +67,20 @@ function Home(){
             </form>
 
             <div className="movies-grid">
-                {movies.map((movie) => (
+                {movies.slice(0, visibleMovies).map((movie) => (
                     <MovieCard 
                         key={movie.id} 
                         movie={movie}/>
                 ))}
             </div>
+            {visibleMovies < movies.length && (
+            <button
+                className="load-more-btn"
+                onClick={() => setVisibleMovies(prev => prev + 12)}
+            >
+                Load More
+            </button>
+            )}
         </div>
     );
 };
