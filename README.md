@@ -1,61 +1,46 @@
-# 🎬 Movie Catalog
+# 🎬 React Movie App
 
-A modern movie discovery web application built with React, Vite, and Tailwind CSS.
+A modern movie discovery application built with React and Vite.
 
 ## Features
 
+- 🔥 Browse popular movies
 - 🔍 Search movies by title
-- 🎥 View detailed movie information
-- ⭐ Check ratings, genres, runtime, and release dates
-- 🎬 Watch official movie trailers
-- ❤️ Add and remove movies from Favorites
-- 📱 Responsive design for desktop, tablet, and mobile devices
-- ⚡ Fast performance powered by Vite
-- 🎨 Modern UI built with Tailwind CSS
+- ❤️ Add and remove favorites
+- 🎥 Watch official movie trailers
+- 📄 View detailed movie information
+- 🎬 Explore similar movies
+- 📱 Fully responsive design
+- ⚡ Fast performance with Vite
 
 ## Technologies Used
 
 - React
 - Vite
+- Tailwind CSS
 - React Router DOM
 - Context API
-- Tailwind CSS
 - TMDB API
+- Vercel
 
-## Project Structure
+## Live Demo
 
-text src/ ├── components/ │   ├── LoadingSpinner.jsx │   ├── MovieCard.jsx │   └── Navbar.jsx │ ├── contexts/ │   ├── FavoritesContext.jsx │   └── FavoritesProvider.jsx │ ├── pages/ │   ├── Home.jsx │   ├── Favorites.jsx │   └── MovieDetails.jsx │ ├── services/ │   └── api.js │ ├── css/ │   └── App.css │ ├── App.jsx └── main.jsx 
+https://react-movie-app-nine-nu.vercel.app
 
 ## Installation
 
-Clone the repository:
+bash git clone https://github.com/your-username/react-movie-app.git cd react-movie-app npm install npm run dev 
 
-bash git clone <repository-url> 
+## Environment Variables
 
-Navigate to the project folder:
+Create a .env file in the root directory:
 
-bash cd react-movie-app 
+env VITE_TMDB_API_KEY=your_tmdb_api_key 
 
-Install dependencies:
-
-bash npm install 
-
-Create a .env file and add your TMDB API key:
-
-env VITE_TMDB_API_KEY=your_api_key 
-
-Start the development server:
-
-bash npm run dev 
-
-Build for production:
+## Build for Production
 
 bash npm run build 
 
-## Screenshots
-
-Add screenshots of the Home Page, Movie Details Page, and Favorites Page here.
-
 ## Author
 
-Developed as a React frontend project using TMDB API.
+Developed as a React learning project using TMDB API.
