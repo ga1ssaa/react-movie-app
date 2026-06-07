@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import MovieCard from "../components/MovieCard";
 import { getPopularMovies, searchMovies } from '../services/api';
 import '../css/App.css'
+import LoadingSpinner from '../components/LoadingSpinner';
 
 function Home(){
 
@@ -11,10 +12,9 @@ function Home(){
     const [searchQuery, setSearhQuery] = useState("");
     const [visibleMovies, setVisibleMovies] = useState(12);
 
-    useEffect(() => {
-
-        const loadMovies = async () => {
+    const loadMovies = async () => {
             try {
+                setError(null);
                 setLoading(true);
                 const popularMovies = await getPopularMovies();
                 setMovies(popularMovies || []);
@@ -27,62 +27,92 @@ function Home(){
                 setLoading(false);
             }
         };
-        loadMovies();
-    }, []);
 
+    useEffect(() => {
+        (async () =>{
+            loadMovies();
+        })();
+    }, []);
+        
     if(loading) {
-        return <h2>Loading...</h2>;
+        return <LoadingSpinner />
     }
     
-    if(error){
-        return <h2>{error}</h2>;
-    }
+        if(error){
+            return(
+                <div className="error-container">
+                    <h2>⚠️ Something went wrong</h2>
+                    <p>{error}</p>
+                </div>
+            );
+        }
 
-    if(!loading && movies.length === 0){
-        return <h2>No movies found</h2>
-    }
+        if(!loading && movies.length === 0){
+            return(
+                <div className="empty-state">
+                    <h2>🎬 No movies found</h2>
+                    <p>Try searching for another movie.</p>
+                <button
+                    className="load-more-btn"
+                    onClick={loadMovies}>
+                        Back to Popular Movies
+                </button>    
+                </div>
+            );
+        }
 
-    const handleSearch = async (e) => {
-        e.preventDefault();
+        const handleSearch = async (e) => {
+            e.preventDefault();
 
-        if(!searchQuery.trim()) return;
-        
-        const results = await searchMovies(searchQuery);
+            if(!searchQuery.trim()) return;
 
-        setMovies(results);
-    }
+            try{
+                setLoading(true);
+                const results = await searchMovies(searchQuery);
 
-    return(
-        <div className="home">
+                setMovies(results || []);
+                setVisibleMovies(12);
+            }
+            catch(error){
+                console.error(error);
+                setError("Failed to search movies");
+            }
+            finally{
+                setLoading(false);
+            }
+        }
 
-            <h1>Movie Catalog</h1>
+        return(
+            <div className="home">
 
-            <form onSubmit={handleSearch}>
-                <input 
-                    type="text" 
-                    placeholder="Search for movies..."
-                    value={searchQuery}
-                    onChange={(e) => setSearhQuery(e.target.value)}
-                />
-            </form>
+                <h1>Movie Catalog</h1>
 
-            <div className="movies-grid">
-                {movies.slice(0, visibleMovies).map((movie) => (
-                    <MovieCard 
-                        key={movie.id} 
-                        movie={movie}/>
-                ))}
+                <form onSubmit={handleSearch}>
+                    <input 
+                        type="text" 
+                        placeholder="Search for movies..."
+                        value={searchQuery}
+                        onChange={(e) => setSearhQuery(e.target.value)}
+                    />
+                </form>
+
+                <div className="movies-grid">
+                    {movies.slice(0, visibleMovies).map((movie) => (
+                        <MovieCard 
+                            key={movie.id} 
+                            movie={movie}/>
+                    ))}
+                </div>
+                {visibleMovies < movies.length && (
+                <button
+                    className="load-more-btn"
+                    onClick={() => setVisibleMovies(prev => prev + 12)}
+                >
+                    Load More
+                </button>
+                )}
             </div>
-            {visibleMovies < movies.length && (
-            <button
-                className="load-more-btn"
-                onClick={() => setVisibleMovies(prev => prev + 12)}
-            >
-                Load More
-            </button>
-            )}
-        </div>
-    );
-};
+        );
+    };
 
 export default Home;

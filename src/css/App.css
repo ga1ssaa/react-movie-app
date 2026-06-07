@@ -3,20 +3,14 @@
     padding: 0;
     box-sizing: border-box;
 }
-html{
+html,
+body,
+#root{
+    min-height: 100vh;
     background-color: hsl(220, 83%, 9%);
 }
 body{
     overscroll-behavior: none;
-    background-color: hsl(220, 83%, 9%);
-}
-#root{
-    width: 100%;
-    min-height: 100%;
-}
-body{
-    margin: 0;
-    background-color: hsl(0, 0%, 90%);
 }
 .movies-grid{
     display: flex;
@@ -28,6 +22,8 @@ h1{
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     text-align: center;
+    color: hsl(0, 0%, 90%);
+    margin: 30px;
 }
 input{
     font-family: Arial, Helvetica, sans-serif;
@@ -40,6 +36,28 @@ input{
     font-size: 1.6rem;
     border-radius: 7px;
     border: 1px solid 
+}
+.spinner-container{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh;
+}
+.spinner{
+    width: 60px;
+    height: 60px;
+    border: 6px solid hsla(0, 0%, 100%, 0.2);;
+    border-top: 6px solid hsl(203, 57%, 56%);;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin{
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);   
+    }
 }
 .load-more-btn{
     display: block;
@@ -57,4 +75,20 @@ input{
 .load-more-btn:hover{
     color: hsl(48, 96%, 53%);
     transform: scale(1.05);
+}
+.empty-state{
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.empty-state h2{
+    color: white;
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+.empty-state p{
+    color: hsl(0, 0%, 70%);
 }

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMovieDetails, getSimilarMovies, getMovieTrailer } from '../services/api';
 import MovieCard from '../components/MovieCard.jsx'
+import LoadingSpinner from '../components/LoadingSpinner.jsx';
 import '../css/MovieDetails.css' 
 
 function MovieDetails(){
@@ -10,6 +11,7 @@ function MovieDetails(){
 
     const [movie, setMovie] = useState(null);
     const [similarMovies, setSimilarMovies] = useState([]);
+    const [error, setError] = useState(null);
     const [trailer, setTrailer] = useState(null);
     const [loading, setLoading] = useState(true);
     
@@ -25,6 +27,7 @@ function MovieDetails(){
             }
             catch(error){
                 console.error(error);
+                setError("Failed to load movie data");
             }
             finally{
                 setLoading(false);
@@ -35,7 +38,16 @@ function MovieDetails(){
     }, [id]);
 
     if(loading){
-        return <h2>Loading...</h2>
+        return <LoadingSpinner />
+    }
+
+    if(error){
+        return(
+            <div className="error-container">
+                <h2>⚠️ Something went wrong</h2>
+                <p>{error}</p>
+            </div>
+        );
     }
 
     if(!movie){
