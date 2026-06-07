@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import { getMovieDetails, getSimilarMovies, getMovieTrailer } from '../services/api';
 import MovieCard from '../components/MovieCard.jsx'
 import LoadingSpinner from '../components/LoadingSpinner.jsx';
-import '../css/MovieDetails.css' 
 
 function MovieDetails(){
 
@@ -42,107 +41,144 @@ function MovieDetails(){
     }
 
     if(error){
-        return(
-            <div className="error-container">
-                <h2>⚠️ Something went wrong</h2>
-                <p>{error}</p>
-            </div>
-        );
-    }
+    return(
+        <div className="min-h-screen flex flex-col justify-center items-center text-center">
+            <h2 className="text-red-500 text-3xl font-bold mb-4">
+                ⚠️ Something went wrong
+            </h2>
+
+            <p className="text-white text-lg">
+                {error}
+            </p>
+        </div>
+    );
+}
 
     if(!movie){
         return <h2>Movie not found</h2>
     }
 
-    return( 
-            <div
-                className="movie-page"
-                style={{
-                    backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`
-                }}
-            >
-                <div className="movie-overlay">
+return (
+    <div
+        className="min-h-screen bg-cover bg-center bg-no-repeat bg-fixed"
+        style={{
+            backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`
+        }}
+    >
+        <div className="min-h-screen bg-black/70 backdrop-blur-sm">
 
-                    <div className="movie-details">
+            <div className="w-full centermax-w-7xl mx-auto px-16 py-16">
+                <div className="h-10"></div>
+                <div className="flex flex-col lg:flex-row items-center lg:items-start justify-center gap-12 text-white max-w-6xl mx-auto w-full">
+                    <img
+                        className="w-[300px] rounded-2xl shadow-2xl"
+                        src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                        alt={movie.title}
+                    />
 
-                        <img
-                            className="movie-details-poster"
-                            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                            alt={movie.title}
-                        />
+                <div className="flex-1 max-w-[600px] text-center lg:ml-10">
 
-                        <div className="movie-details-info">
+                        <h1 className="text-[hsl(195,41%,45%)] text-5xl font-bold mb-6 break-words">
+                            {movie.title}
+                        </h1>
+                        <div className="h-2"></div>
 
-                            <h1>{movie.title}</h1>
+                        <p className="text-xl font-bold mb-4">
+                            ⭐ Rating: {movie.vote_average.toFixed(1)} / 10
+                        </p>
+                        <div className="h-2"></div>
 
-                            <p>
-                                ⭐ Rating: {movie.vote_average.toFixed(1)} / 10
-                            </p>
+                        <p className="text-xl font-bold mb-4">
+                            📅 Release Date: {movie.release_date}
+                        </p>
+                        <div className="h-2"></div>
 
-                            <p>
-                                📅 Release Date: {movie.release_date}
-                            </p>
+                        <p className="text-lg leading-8 mb-8 font-bold">
+                            🍀 {movie.overview}
+                        </p>
+                        <div className="h-2"></div>
 
-                            <p>
-                                🍀 {movie.overview}
-                            </p>
-
-                        <div className = "movie-meta">
+                        <div className="border-t border-white/20 pt-6 space-y-4 font-bold">
 
                             <p>
                                 🎭 Genres: {movie.genres
                                     .map(genre => genre.name)
                                     .join(", ")}
                             </p>
+                            <div className="h-2"></div>
 
                             <p>
                                 ⚡️ Runtime: {movie.runtime} min
                             </p>
+                            <div className="h-2"></div>
 
                             <p>
                                 🌎 Original Language: {movie.original_language.toUpperCase()}
                             </p>
+                            <div className="h-2"></div>
 
                             <p>
                                 👥 Votes: {movie.vote_count}
                             </p>
+                            <div className="h-2"></div>
 
                             <p>
                                 🎬 Production: {movie.production_companies
                                     .slice(0, 3)
                                     .map(company => company.name)
-                                    .join(", ")
-                                }
+                                    .join(", ")}
                             </p>
+                            <div className="h-2"></div>
+
                         </div>
+
                     </div>
+
                 </div>
-                
+                <div className="h-10"></div>
                 {trailer && (
-                    <div className="movie-trailer">
-                        <h2>🎬 Official Trailer</h2>
+                    <div className="mt-24 flex flex-col items-center">
+
+                        <h2 className="text-[hsl(195,41%,45%)] text-5xl mb-10 text-center font-bold">
+                            🎬 Official Trailer
+                        </h2>
+                        <div className="h-5"></div>
 
                         <iframe
+                            className="w-full max-w-5xl aspect-video rounded-2xl shadow-2xl"
                             src={`https://www.youtube.com/embed/${trailer.key}`}
                             title="Movie Trailer"
                             allowFullScreen
                         />
+
                     </div>
                 )}
 
-                <div className = "similar-movies">
-                    <h2>You May Also Like</h2>
-                <div className = "movie-grid">
-                    {similarMovies.slice(0, 12).map(movie => (
-                        <MovieCard 
-                            key={movie.id}
-                            movie={movie}
-                        />
-                    ))}
+                <div className="h-10"></div>
+                <div className="mt-24 flex flex-col items-center">
+
+                    <h2 className="text-[hsl(195,41%,45%)] text-5xl text-center mb-12 font-bold">
+                        You May Also Like
+                    </h2>
+                    <div className="h-5"></div>
+
+                    <div className="w-full max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 place-items-center">
+
+                        {similarMovies.slice(0, 12).map(movie => (
+                            <MovieCard
+                                key={movie.id}
+                                movie={movie}
+                            />
+                        ))}
+
+                    </div>
+
                 </div>
+
             </div>
+
         </div>
     </div>
-    );
+);
 };
 export default MovieDetails;

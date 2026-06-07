@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import MovieCard from "../components/MovieCard";
 import { getPopularMovies, searchMovies } from '../services/api';
-import '../css/App.css'
 import LoadingSpinner from '../components/LoadingSpinner';
 
 function Home(){
@@ -39,21 +38,26 @@ function Home(){
     }
     
         if(error){
-            return(
-                <div className="error-container">
-                    <h2>⚠️ Something went wrong</h2>
-                    <p>{error}</p>
-                </div>
-            );
-        }
+    return(
+        <div className="min-h-screen flex flex-col justify-center items-center text-center">
+            <h2 className="text-red-500 text-3xl font-bold mb-4">
+                ⚠️ Something went wrong
+            </h2>
+
+            <p className="text-white text-lg">
+                {error}
+            </p>
+        </div>
+    );
+}
 
         if(!loading && movies.length === 0){
             return(
-                <div className="empty-state">
-                    <h2>🎬 No movies found</h2>
-                    <p>Try searching for another movie.</p>
+                <div className="flex min-h-[60vh] flex-col justify-center items-center text-center">
+                    <h2 className="text-white font-bold text-2xl mb-2">🎬 No movies found</h2>
+                    <p className="text-white/70 font-bold">Try searching for another movie.</p>
                 <button
-                    className="load-more-btn"
+                    className="block bg-slate-950 text-white mt-2 mx-auto mb-10 py-3 px-6 border-0 rounded-xl cursor-pointer text-base font-bold transition-all hover:text-yellow-400 hover:scale-105 duration-300"
                     onClick={loadMovies}>
                         Back to Popular Movies
                 </button>    
@@ -83,34 +87,45 @@ function Home(){
         }
 
         return(
-            <div className="home">
+            <div className="home min-h-screen pt-8">
+                <div className="h-8"></div>
 
-                <h1>Movie Catalog</h1>
+                <h1 className="text-3xl font-bold text-center text-white/90 mb-12">
+                    Movie Catalog
+                </h1>
+                <div className="h-8"></div>
 
-                <form onSubmit={handleSearch}>
-                    <input 
-                        type="text" 
-                        placeholder="Search for movies..."
-                        value={searchQuery}
-                        onChange={(e) => setSearhQuery(e.target.value)}
-                    />
-                </form>
+            <form className="flex justify-center mb-8" onSubmit={handleSearch}>
+                <input
+                    className="w-full max-w-xl px-4 py-3 font-bold text-center text-xl text-white bg-slate-900 rounded-lg border border-gray-600"
+                    type="text"
+                    placeholder="Search for movies..."
+                    value={searchQuery}
+                    onChange={(e) => setSearhQuery(e.target.value)}
+                />
+            </form>
+            <div className="h-8"></div>
 
-                <div className="movies-grid">
+                <div className="flex flex-wrap justify-center gap-x-12 gap-y-12 p-12">
                     {movies.slice(0, visibleMovies).map((movie) => (
                         <MovieCard 
                             key={movie.id} 
                             movie={movie}/>
                     ))}
                 </div>
-                {visibleMovies < movies.length && (
-                <button
-                    className="load-more-btn"
-                    onClick={() => setVisibleMovies(prev => prev + 12)}
-                >
-                    Load More
-                </button>
-                )}
+                <div className="h-8"></div>
+                <div className="flex justify-center mt-20 mb-32">
+                    {visibleMovies < movies.length && (
+                        <button
+                            className="bg-slate-950 text-white mb-10 py-3 px-6 border-0 rounded-xl cursor-pointer text-base font-bold transition-all hover:text-yellow-400 hover:scale-105 duration-300"
+                                onClick={() => setVisibleMovies(prev => prev + 12)}
+                            >
+                                Load More
+                        </button>
+                    )}
+                </div>
+                <div className="h-8">
+                </div>
             </div>
         );
     };

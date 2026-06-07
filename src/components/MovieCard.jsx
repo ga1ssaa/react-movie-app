@@ -1,9 +1,8 @@
 import { useContext } from 'react';
 import FavoritesContext from '../contexts/FavoritesContext';
-import "../css/MovieCard.css"
 import { Link } from 'react-router-dom';
 
-function MovieCard({movie}){
+function MovieCard({ movie }) {
 
     const {
         favorites,
@@ -16,38 +15,50 @@ function MovieCard({movie}){
     );
 
     const handleFavoriteClick = () => {
-        if(isFavorite){
+        if (isFavorite) {
             removeFromFavorites(movie.id);
-        }
-        else{
+        } else {
             addToFavorites(movie);
         }
     };
 
-    return(
-        <div className="movie-card">
+    return (
+        <div className="w-[260px] m-4 bg-slate-900 rounded-xl overflow-hidden shadow-xl transition-transform duration-300 hover:scale-105">
+
+
             <Link to={`/movie/${movie.id}`}>
-                <img 
-                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} 
+                <img
+                    className="w-full h-[350px] object-cover block"
+                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                     alt={movie.title}
                 />
             </Link>
+            
 
-            <div className="movie-info">
+            <div className="flex justify-between items-center p-3 text-white">
 
-                <Link to={`/movie/${movie.id}`}>
-                    <h3>{movie.title}</h3>
+                <div className="h-8"></div>
+
+                <Link
+                    to={`/movie/${movie.id}`}
+                    className="text-white no-underline transition-colors duration-300 hover:text-[hsl(195,41%,45%)]"
+                >
+                    <h3 className="font-semibold text-lg">
+                        {movie.title}
+                    </h3>
                 </Link>
 
-                <button 
-                    className="favorite-btn"
-                    onClick = { handleFavoriteClick }
+                <button
+                    className="bg-transparent border-0 text-3xl cursor-pointer"
+                    onClick={handleFavoriteClick}
                 >
                     {isFavorite ? "❤️" : "🤍"}
                 </button>
 
             </div>
+
         </div>
     );
-};
+}
+
 export default MovieCard;

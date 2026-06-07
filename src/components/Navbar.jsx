@@ -1,11 +1,20 @@
 import { Link } from "react-router-dom";
-import "../css/Navbar.css";
 
 function Navbar(){
     return(
-        <nav>
-            <Link to="/">Home</Link>
-            <Link to="/favorites">Favorites</Link>
+        <nav className="flex justify-center gap-10 py-10 bg-slate-900">
+            <Link 
+                to="/"
+                className = "text-white text-2xl font-bold hover:text-yellow-400 transition-colors"
+            >
+                Home
+            </Link>
+            <Link 
+                to="/favorites"
+                className = "text-white text-2xl font-bold hover:text-yellow-400 transition-colors">
+                Favorites
+                <div className="h-3"></div>
+            </Link> 
         </nav>
     );
 };
