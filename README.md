@@ -1,46 +1,64 @@
 # 🎬 React Movie App
 
-A modern movie discovery application built with React and Vite.
+A modern movie discovery web application built with React and TMDB API.
 
-## Features
+## 🚀 Features
 
-- 🔥 Browse popular movies
-- 🔍 Search movies by title
-- ❤️ Add and remove favorites
-- 🎥 Watch official movie trailers
-- 📄 View detailed movie information
-- 🎬 Explore similar movies
-- 📱 Fully responsive design
-- ⚡ Fast performance with Vite
+* Browse popular movies
+* Search movies by title
+* View movie details
+* Responsive design for desktop and mobile
+* Loading states and error handling
+* Dynamic routing with React Router
+* Modern UI built with Tailwind CSS
+* API integration with TMDB
 
-## Technologies Used
+## 🛠️ Technologies Used
 
-- React
-- Vite
-- Tailwind CSS
-- React Router DOM
-- Context API
-- TMDB API
-- Vercel
+* React
+* React Router DOM
+* Tailwind CSS
+* TMDB API
+* Vite
+* JavaScript (ES6+)
 
-## Live Demo
+## 📸 Screenshots
 
-https://react-movie-app-nine-nu.vercel.app
+### Home Page
+![Home](docs/screenshots/home_page.png)
 
-## Installation
+### Search Results
+![Search](docs/screenshots/search_page.png)
 
-bash git clone https://github.com/your-username/react-movie-app.git cd react-movie-app npm install npm run dev 
+### Favorites Page
+![Favorites](docs/screenshots/favorites_page.png)
 
-## Environment Variables
+### Movie Details
+![Movie Details](docs/screenshots/movie_details.png)
 
-Create a .env file in the root directory:
+### Mobile View
+![Mobile](docs/screenshots/mobile_view.png)
 
-env VITE_TMDB_API_KEY=your_tmdb_api_key 
+## 📱 Responsive Design
 
-## Build for Production
+The application is fully responsive and optimized for desktop and mobile devices.
 
-bash npm run build 
+## ▶️ Installation
 
-## Author
+```bash
+git clone https://github.com/ga1ssaa/react-movie-app.git
+cd react-movie-app
+npm install
+npm run dev
+```
 
-Developed as a React learning project using TMDB API.
+## 🌐 Live Demo
+
+https://react-movie-app-nine-nu.vercel.app/
+
+## 👨‍💻 Author
+
+Developed by [Aldiyar Gaisa](https://github.com/ga1ssaa)
+
+* GitHub: https://github.com/ga1ssaa
+* LinkedIn: https://www.linkedin.com/in/ga1ssaa/
